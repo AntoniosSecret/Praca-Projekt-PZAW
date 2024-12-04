@@ -1,0 +1,10 @@
+:root {
+    --base-light: #BFB48F;
+    --base-dark: #393E41;
+    --secondary-one: #a52a2a;
+    --secondary-two: #51BBFE;
+}
+
+body {
+    background-color:var(--base-light);
+}
