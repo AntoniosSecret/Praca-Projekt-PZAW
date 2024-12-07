@@ -3,7 +3,9 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def index(request):
+def home(request):
     retcode = 200
-    context = {}
-    return render(request, 'games/base.html', context, status=retcode)
+    context = {
+        'title': 'Home'
+    }
+    return render(request, 'games/home.html', context, status=retcode)

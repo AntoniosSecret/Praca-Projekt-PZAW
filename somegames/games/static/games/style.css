@@ -8,3 +8,44 @@
 body {
     background-color:var(--base-light);
 }
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-inline: auto;
+    width: 70%;
+    border-bottom: var(--base-dark) 1px solid;
+}
+
+nav > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    text-decoration: none;
+    font-family: 'Trebuchet MS';
+    font-weight: bold;
+    font-size: 1.5rem;
+    
+    color: var(--base-dark);
+    background-color: var(--base-light);
+
+    min-height: 60px;
+
+    transition: 200ms;
+}
+
+nav > a:hover {
+    background-color: #9c9376;
+    color: #ffffff;
+    font-size: 2rem;
+    transition: 200ms;
+}
+
+#logo {
+    display: block;
+    margin-inline: auto;
+    width: 30%;
+}
