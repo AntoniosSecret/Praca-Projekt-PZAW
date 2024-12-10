@@ -6,25 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'games/style.css' %}">
     <link rel="shortcut icon" href="{% static 'games/favicon.svg' %}" type="image/svg">
-    <title>{{ title }}</title>
+    <title>{{ title }} - Some Games</title>
 </head>
 <body>
-    {% block header %}
-    <header>
-
-    </header>
-    {% endblock %}
-    
-    {% block main %}
-    <main>
-
-    </main>
-    {% endblock %}
-    
-    {% block footer %}
-    <footer>
-
-    </footer>
+    {% block content %}
     {% endblock %}
 </body>
 </html>

@@ -1,13 +1,19 @@
 {% extends 'games/base.html' %}
 {% load static %}
 
-{% block header %}
-<img src="{% static 'games/logo.svg' %}" alt="Some Games Logo" id="logo">
-<nav>
-    <a href="#">Home</a>
-    <a href="#">Games</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <a href="#">Settings</a>
-</nav>
+{% block content %}
+<header>
+    <img src="{% static 'games/logo.svg' %}" alt="Some Games Logo" id="logo">
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Gry</a>
+        <a href="#">Mój Profil</a>
+        <a href="#">Ustawienia</a>
+    </nav>
+</header>
+<main>
+    {% for message in messages %}
+    <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+    {% endfor %}
+</main>
 {% endblock %}
