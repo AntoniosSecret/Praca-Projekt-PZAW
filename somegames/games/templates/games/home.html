@@ -13,7 +13,10 @@
 </header>
 <main>
     {% for message in messages %}
-    <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+    <div class="{% if message.tags %}{{ message.tags }}{% endif %} message">
+        {{ message }}
+        <input type="button" value="&#10006" id="messageButton">
+    </div>
     {% endfor %}
 </main>
 {% endblock %}

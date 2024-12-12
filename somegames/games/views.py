@@ -17,20 +17,27 @@ def home(request):
 
 
 def login_user(request):
-    retcode = 200
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            messages.success(request, "Zalogowano pomyślnie.")
-            return redirect('home')
-        else:
-            retcode = 401
-            messages.error(request, "Nieprawidłowy login lub hasło. Spróbuj ponownie.")
-            return redirect('login')
+    context = {
+        'title': 'Login'
+    }
+    if request.user.is_authenticated:
+        retcode = 400
+        return redirect('home')
     else:
-        return render(request, 'games/login.html', status=retcode)
+        retcode = 200
+        if request.method == "POST":
+            username = request.POST['username']
+            password = request.POST['password']
+            
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Zalogowano pomyślnie.")
+                return redirect('home')
+            else:
+                retcode = 401
+                messages.error(request, "Nieprawidłowy login lub hasło. Spróbuj ponownie.")
+                return redirect('login')
+        else:
+            return render(request, 'games/login.html', context, status=retcode)

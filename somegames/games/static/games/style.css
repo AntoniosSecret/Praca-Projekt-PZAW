@@ -157,9 +157,11 @@ form > .form-label, .form-input, .form-button {
     box-shadow: none;
 }
 
-.success {
-    background-color: #16aa4f;
-    color: white;
+.message {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -168,13 +170,23 @@ form > .form-label, .form-input, .form-button {
     margin-inline: auto;
 }
 
+.success {
+    background-color: #16aa4f;
+    color: white;
+}
+
 .error {
     background-color: #fae8b1;
     color: var(--base-dark);
-    padding: 10px;
+}
+
+.message > input[type=button] {
+    position: absolute;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
     border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 25px;
-    width: 70%;
-    margin-inline: auto;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
 }
