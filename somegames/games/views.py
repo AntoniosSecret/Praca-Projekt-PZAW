@@ -41,3 +41,9 @@ def login_user(request):
                 return redirect('login')
         else:
             return render(request, 'games/login.html', context, status=retcode)
+
+
+def all_games(request):
+    retcode = 200
+    context = {}
+    return render(request, 'games/all_games.html', context, status=retcode)

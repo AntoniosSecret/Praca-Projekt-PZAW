@@ -5,17 +5,17 @@
 <header>
     <img src="{% static 'games/logo.svg' %}" alt="Some Games Logo" id="logo">
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Gry</a>
+        <a href="all-games">Gry</a>
         <a href="#">Mój Profil</a>
         <a href="#">Ustawienia</a>
+        <a href="#">Wyloguj</a>
     </nav>
-</header>
+</header>   
 <main>
     {% for message in messages %}
-    <div class="{% if message.tags %}{{ message.tags }}{% endif %} message">
+    <div class="{% if message.tags %}{{ message.tags }}{% endif %} message" id="message-{{ forloop.counter }}">
         {{ message }}
-        <input type="button" value="&#10006" id="messageButton">
+        <input type="button" value="&#10006" id="messageButton" onclick="{document.getElementById('message-{{ forloop.counter }}').style.display = 'none'}">
     </div>
     {% endfor %}
 </main>
