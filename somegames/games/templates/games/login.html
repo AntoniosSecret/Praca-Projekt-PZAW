@@ -2,17 +2,13 @@
 {% load static %}
 
 {% block content %}
-<header>
-    <img src="{% static 'games/logo.svg' %}" alt="Some Games Logo" id="logo">
-    <h1>Login</h1>
-</header>
 <main>
-    
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
+        <h2>Login</h2>
         <div>
-            <label for="emailInput" class="form-label">Login</label>
-            <input type="text" class="form-input" id="usernameInput" name="username" placeholder="Login tutaj....">
+            <label for="usernameInput" class="form-label">Nazwa</label>
+            <input type="text" class="form-input" id="usernameInput" name="username" placeholder="Nazwa tutaj....">
         </div>
         <div>
             <label for="passwordInput" class="form-label">Hasło</label>

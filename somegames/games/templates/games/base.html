@@ -9,14 +9,7 @@
     <title>{{ title }} - Some Games</title>
 </head>
 <body>
-    {% for message in messages %}
-    <div class="{% if message.tags %}{{ message.tags }}{% endif %} message" id="message-{{ forloop.counter }}">
-        {{ message }}
-        <input type="button" value="&#10006" id="messageButton" onclick="{document.getElementById('message-{{ forloop.counter }}').style.display = 'none'}">
-    </div>
-    {% endfor %}
     {% block content %}
     {% endblock %}
-    
 </body>
 </html>
