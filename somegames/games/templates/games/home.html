@@ -5,18 +5,14 @@
 <header>
     <img src="{% static 'games/logo.svg' %}" alt="Some Games Logo" id="logo">
     <nav>
-        <a href="all-games">Gry</a>
+        <a href="{% url 'all_games' %}">Gry</a>
         <a href="#">Mój Profil</a>
         <a href="#">Ustawienia</a>
-        <a href="#">Wyloguj</a>
+        <a href="{% url 'logout' %}">Wyloguj</a>
     </nav>
 </header>   
 <main>
-    {% for message in messages %}
-    <div class="{% if message.tags %}{{ message.tags }}{% endif %} message" id="message-{{ forloop.counter }}">
-        {{ message }}
-        <input type="button" value="&#10006" id="messageButton" onclick="{document.getElementById('message-{{ forloop.counter }}').style.display = 'none'}">
-    </div>
-    {% endfor %}
+    {% include 'games/messages.html' %}
+
 </main>
 {% endblock %}

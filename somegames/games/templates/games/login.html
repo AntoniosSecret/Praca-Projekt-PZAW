@@ -3,11 +3,13 @@
 
 {% block content %}
 <main>
+    {% include 'games/messages.html' %}
+
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <h2>Login</h2>
         <div>
-            <label for="usernameInput" class="form-label">Nazwa</label>
+            <label for="usernameInput" class="form-label">Nazwa</label>{{ usernameError }}
             <input type="text" class="form-input" id="usernameInput" name="username" placeholder="Nazwa tutaj....">
         </div>
         <div>

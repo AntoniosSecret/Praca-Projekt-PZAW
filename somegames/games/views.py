@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
@@ -41,6 +41,11 @@ def login_user(request):
                 return redirect('login')
         else:
             return render(request, 'games/login.html', context, status=retcode)
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, "Pomyślnie wylogowano.")
+    return redirect('login')
 
 
 def all_games(request):
