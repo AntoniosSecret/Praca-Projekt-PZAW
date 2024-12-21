@@ -1,27 +1,30 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
+from .forms import LoginForm
 
 
 def home(request):
     context = {
-        'title': 'Home'
+        'title': 'Strona Główna'
     }
     if request.user.is_authenticated:
         retcode = 200
         return render(request, 'games/home.html', context, status=retcode)
     else:
         retcode = 400
+        messages.info(request, "Zaloguj się, by wejść na stronę")
         return redirect('login')
 
 
 def login_user(request):
     context = {
-        'title': 'Login'
+        'title': 'Logowanie',
+        'form': LoginForm(),
     }
     if request.user.is_authenticated:
         retcode = 400
+        messages.info(request, "Już jesteś zalogowany/a.")
         return redirect('home')
     else:
         retcode = 200
@@ -42,10 +45,19 @@ def login_user(request):
         else:
             return render(request, 'games/login.html', context, status=retcode)
 
+
 def logout_user(request):
     logout(request)
     messages.success(request, "Pomyślnie wylogowano.")
     return redirect('login')
+
+
+def register_user(request):
+    retcode = 200
+    context = {
+        'title': 'Rejestracja'
+    }
+    return render(request, 'games/register.html', context, status=retcode)
 
 
 def all_games(request):
