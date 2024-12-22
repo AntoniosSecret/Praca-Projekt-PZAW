@@ -5,12 +5,14 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         max_length=36,
         label='Nazwa',
+        label_suffix='',
         widget=forms.TextInput,
     )
 
     password = forms.CharField(
         min_length=8,
         label='Hasło',
+        label_suffix='',
         widget=forms.PasswordInput,
     )
 

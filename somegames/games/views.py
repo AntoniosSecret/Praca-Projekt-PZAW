@@ -2,17 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm
-
+from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     context = {
-        'title': 'Strona Główna'
+        'title': 'Strona Główna',
     }
     if request.user.is_authenticated:
         retcode = 200
         return render(request, 'games/home.html', context, status=retcode)
     else:
-        retcode = 400
         messages.info(request, "Zaloguj się, by wejść na stronę")
         return redirect('login')
 
@@ -23,25 +23,27 @@ def login_user(request):
         'form': LoginForm(),
     }
     if request.user.is_authenticated:
-        retcode = 400
         messages.info(request, "Już jesteś zalogowany/a.")
         return redirect('home')
     else:
         retcode = 200
         if request.method == "POST":
-            username = request.POST['username']
-            password = request.POST['password']
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
             
-            user = authenticate(request, username=username, password=password)
+                user = authenticate(request, username=username, password=password)
 
-            if user is not None:
-                login(request, user)
-                messages.success(request, "Zalogowano pomyślnie.")
-                return redirect('home')
+                if user is not None:
+                    login(request, user)
+                    messages.success(request, "Zalogowano pomyślnie.")
+                    return redirect('home')
+                else:
+                    messages.error(request, "Nieprawidłowy login lub hasło. Spróbuj ponownie.")
+                    return redirect('login')
             else:
-                retcode = 401
-                messages.error(request, "Nieprawidłowy login lub hasło. Spróbuj ponownie.")
-                return redirect('login')
+                return HttpResponse('Invalid')
         else:
             return render(request, 'games/login.html', context, status=retcode)
 
@@ -53,11 +55,24 @@ def logout_user(request):
 
 
 def register_user(request):
-    retcode = 200
     context = {
-        'title': 'Rejestracja'
+        'title': 'Rejestracja',
+        'form': UserCreationForm()
     }
-    return render(request, 'games/register.html', context, status=retcode)
+    if request.user.is_authenticated:
+        messages.info(request, "Już jesteś zalogowany/a.")
+        return redirect('home')
+    else:
+        retcode = 200
+        if request.method == "POST":
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Zarejestrowano pomyślnie.")
+                return redirect('login')
+            else:
+                messages.error(request, "Niepoprawny formularz.")
+        return render(request, 'games/register.html', context, status=retcode)
 
 
 def all_games(request):

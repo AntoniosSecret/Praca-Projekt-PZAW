@@ -5,19 +5,17 @@
 <main>
     {% include 'games/messages.html' %}
 
-    <form method="post" action="{% url 'login' %}">
+    <form method="post" action="{% url 'register' %}" id="registerForm" class="form1">
         {% csrf_token %}
+
         <img src="{% static 'games/favicon.svg' %}" alt="Logo">
-        <h2>Login</h2>
-        <div>
-            <label for="usernameInput" class="form-label">Nazwa</label>{{ usernameError }}
-            <input type="text" class="form-input" id="usernameInput" name="username" placeholder="Nazwa tutaj....">
-        </div>
-        <div>
-            <label for="passwordInput" class="form-label">Hasło</label>
-            <input type="password" class="form-input" id="passwordInput" name="password" placeholder="Hasło tutaj....">
-        </div>
-        <input type="submit" value="Zaloguj" class="form-button">
+        <h2>{{ title }}</h2>
+
+        {{ form }}
+
+        <input type="submit" value="Zarejestruj" class="form-button">
+
+        <a href="{% url 'login' %}" class="form-link">Posiadasz już konto? Zaloguj się.</a>
     </form>
 </main>
 {% endblock %}
