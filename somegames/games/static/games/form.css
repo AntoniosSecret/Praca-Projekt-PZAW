@@ -1,5 +1,7 @@
 #formMain {
     align-items: center;
+
+    padding-top: 0;
 }
 
 #registerForm {
