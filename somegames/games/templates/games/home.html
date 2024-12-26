@@ -5,18 +5,21 @@
 <header>
     <nav>
         <a href="{% url 'all_games' %}" content="Gry" id="gamesIcon"><img src="{% static 'games/icons/controller.svg' %}" alt="ikona gry"></a>
-        <a href="#" content="Mój Profil" id="profileIcon"><img src="{% static 'games/icons/user.svg' %}" alt="ikona profilu"></a>
+        <a href="{% url 'profile' %}" content="Mój Profil" id="profileIcon"><img src="{% static 'games/icons/user.svg' %}" alt="ikona profilu"></a>
     </nav>
-    <img src="{% static 'games/logo2.svg' %}" alt="Some Games Logo" id="logo">
+    <img src="{% static 'games/logos/logo2.svg' %}" alt="Some Games Logo" id="logo">
     <nav>
-        <a href="#" content="Ustawienia" id="settingsIcon"><img src="{% static 'games/icons/gear.svg' %}" alt="ikona ustawień"></a>
+        <a href="{% url 'settings' %}" content="Ustawienia" id="settingsIcon"><img src="{% static 'games/icons/gear.svg' %}" alt="ikona ustawień"></a>
         <a href="{% url 'logout' %}" content="Wyloguj" id="logoutIcon"><img src="{% static 'games/icons/logout.svg' %}" alt="ikona wylogowania"></a>
     </nav>
-</header>   
+</header>
 <main>
     {% include 'games/messages.html' %}
+
     {% if user.is_superuser %}
         <p>Hello, Admin.</p>
     {% endif %}
+
+    {{ prev }}
 </main>
 {% endblock %}

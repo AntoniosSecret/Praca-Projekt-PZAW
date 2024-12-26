@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     context = {
@@ -76,6 +75,37 @@ def register_user(request):
 
 
 def all_games(request):
-    retcode = 200
-    context = {}
-    return render(request, 'games/all_games.html', context, status=retcode)
+    context = {
+        'title': 'Gry',
+    }
+    if request.user.is_authenticated:
+        retcode = 200
+        return render(request, 'games/all_games.html', context, status=retcode)
+    else:
+        messages.info(request, "Zaloguj się, by wejść na stronę")
+        return redirect('login')
+        
+
+
+def profile(request):
+    context = {
+        'title': f'Profil: {request.user.username}',
+    }
+    if request.user.is_authenticated:
+        retcode = 200
+        return render(request, 'games/profile.html', context, status=retcode)
+    else:
+        messages.info(request, "Zaloguj się, by wejść na stronę")
+        return redirect('login')
+
+
+def settings(request):
+    context = {
+        'title': 'Ustawienia',
+    }
+    if request.user.is_authenticated:
+        retcode = 200
+        return render(request, 'games/settings.html', context, status=retcode)
+    else:
+        messages.info(request, "Zaloguj się, by wejść na stronę")
+        return redirect('login')
