@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<main>
+<main id="formMain">
     {% include 'games/messages.html' %}
 
     <form method="post" action="{% url 'login' %}" id="loginForm" class="form1">
@@ -11,9 +11,24 @@
         <img src="{% static 'games/favicon.svg' %}" alt="Logo">
         <h2>{{ title }}</h2>
 
-        {{ form }}
+        <div>
+            <div>
+                <label for="usernameInput">
+                    {{ form.username.label }}
+                </label>
+            </div>
+            {{ form.username }}
+        </div>
+        <div>
+            <div>
+                <label for="passwordInput">
+                    {{ form.password.label }}
+                </label>
+            </div>
+            {{ form.password }}
+        </div>
         
-        <input type="submit" value="Zaloguj" class="form-button">
+        <input type="submit" value="Zaloguj się" class="form-button">
 
         <a href="{% url 'register' %}" class="form-link">Nie masz konta? Zarejestruj się.</a>
     </form>

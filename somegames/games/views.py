@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 
@@ -57,7 +57,7 @@ def logout_user(request):
 def register_user(request):
     context = {
         'title': 'Rejestracja',
-        'form': UserCreationForm()
+        'form': RegisterForm(),
     }
     if request.user.is_authenticated:
         messages.info(request, "Już jesteś zalogowany/a.")
@@ -65,7 +65,7 @@ def register_user(request):
     else:
         retcode = 200
         if request.method == "POST":
-            form = UserCreationForm(request.POST)
+            form = RegisterForm(request.POST)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Zarejestrowano pomyślnie.")
