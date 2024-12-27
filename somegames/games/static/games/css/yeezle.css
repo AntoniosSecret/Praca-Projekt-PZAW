@@ -1,0 +1,226 @@
+@font-face {
+    src: url('/static/games/fonts/VCR_OSD_MONO_1.001.ttf');
+    font-family: VCR;
+}
+
+:root {
+    --first: #0f0a0a;
+    --second: #3d2828;
+    --light: whitesmoke;
+}
+
+body {
+    background: rgb(0,0,0);
+    background: radial-gradient(circle, #000000 0%, var(--first) 40%, var(--second) 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    margin: 0;
+    padding: 0;
+
+    font-family: VCR;
+    color: white;
+}
+
+#yeezlelogo {
+    display: block;
+
+    margin: 50px auto 0;
+
+    width: 30%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0 auto;
+
+    width: 50%;
+}
+
+main > p {
+    font-family: 'Trebuchet MS';
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#songInput {
+    padding: 1em;
+
+    width: 20em;
+
+    background-color: var(--light);
+
+    border: 0;
+    border-radius: 5px;
+
+    font-family: VCR;
+    font-size: 1rem;
+}
+
+.songs-list {
+    position: absolute;
+
+    border: none;
+
+    max-height: 200px;
+
+    overflow-y: auto;
+
+    background-color: var(--light);
+    color: black;
+
+    z-index: 10;
+}
+
+.song {
+    padding: 10px;
+
+    background-color: var(--light);
+
+    cursor: pointer;
+}
+
+.song:hover {
+    filter: brightness(90%);
+}
+
+#songButton {
+    margin: 20px auto 20px;
+    padding: 0.7em;
+
+    width: 10em;
+    
+    border-radius: 5px;
+
+    font-family: VCR;
+    font-size: 1rem;
+}
+
+#songButton:hover {
+    filter: brightness(80%);
+
+    cursor: pointer;
+}
+
+th {
+    padding: 5px 2em;
+
+    border-bottom: var(--light) 2px solid;
+}
+
+td {
+    text-align: center;
+
+    border: var(--light) 2px solid;
+}
+
+.imageBox {
+    display: flex;
+    flex-direction: row;
+}
+
+td > img {
+    height: 3em;
+    width: 3em;
+}
+
+.arrow {
+    flex: 1;
+
+    font-size: 20px;
+    margin: auto;
+}
+
+#endBackground {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: none;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: #00000080;
+    color: var(--light);
+
+    z-index: 20;
+}
+
+#endPage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 60%;
+
+    padding-bottom: 50px;
+
+    border-radius: 20px;
+
+    background-color: #7a7a7a93;
+    color: var(--light);
+
+    z-index: 30;
+}
+
+#endButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    width: 1.5em;
+    height: 1.5em;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: #a7a7a780;
+    color: var(--light);
+
+    font-size: 2rem;
+}
+
+#endButton:hover {
+    cursor: pointer;
+}
+
+#endPage > p {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+#endPage > span {
+    display: block;
+
+    margin: 0 auto 10px;
+
+    width: 60%;
+    
+    font-size: 1.5rem;
+}
+
+#endPage > img {
+    display: block;
+
+    margin: 0 auto 10px;
+
+    width: 60%;
+}
+
+#endPage > h1 {
+    display: block;
+
+    margin: 0 auto 10px;
+
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}

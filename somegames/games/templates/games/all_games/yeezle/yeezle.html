@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'games/css/yeezle.css' %}">
+    <link rel="shortcut icon" href="{% static 'games/logos/yeezle_favicon.svg' %}" type="image/svg">
+    <script src="{% static 'games/js/yeezle.js' %}" defer></script>
+
+    <title>{{ title }} - Some Games</title>
+</head>
+<body>
+    <img src="{% static 'games/logos/yeezle.svg' %}" alt="Yeezle" id="yeezlelogo">
+    <main>
+        <p>Zgadnij piosenkę Kanyego</p>
+
+        <div>
+            <input type="text" id="songInput" placeholder="Próba 1/10">
+            <div id="list" class="songs-list"></div>
+        </div>
+
+        <input type="button" value="Zgadnij" id="songButton">
+
+        <table id="songTable">
+            <thead>
+                <th>Nazwa Utworu</th>
+                <th>Album</th>
+                <th>Nr Utworu</th>
+                <th>Długość Utworu</th>
+            </thead>
+            <tr style="height: 10px;"></tr>
+        </table>
+    </main>
+
+    <div id="endBackground">
+        <div id="endPage">
+            <input type="button" value="&times;" id="endButton">
+        </div>
+    </div>
+</body>
+</html>

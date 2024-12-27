@@ -9,4 +9,7 @@ urlpatterns = [
     path('all-games/', views.all_games, name='all_games'),
     path('profile/', views.profile, name='profile'),
     path('settings/', views.settings, name='settings'),
+    
+    # GAMES
+    path('all-games/yeezle/', views.yeezle, name='yeezle'),
 ]

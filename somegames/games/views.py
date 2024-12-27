@@ -109,3 +109,17 @@ def settings(request):
     else:
         messages.info(request, "Zaloguj się, by wejść na stronę")
         return redirect('login')
+
+
+# GAMES
+
+def yeezle(request):
+    context = {
+        'title': 'Yeezle',
+    }
+    if request.user.is_authenticated:
+        retcode = 200
+        return render(request, 'games/all_games/yeezle/yeezle.html', context, status=retcode)
+    else:
+        messages.info(request, "Zaloguj się, by wejść na stronę")
+        return redirect('login')
