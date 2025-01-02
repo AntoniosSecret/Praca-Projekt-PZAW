@@ -12,6 +12,7 @@
 </head>
 <body>
     <img src="{% static 'games/logos/yeezle.svg' %}" alt="Yeezle" id="yeezlelogo">
+    <a href="{% url 'all_games' %}"><img src="{% static 'games/icons/exit.svg' %}" alt="Exit Game" id="exitGame"></a>
     <main>
         <p>Zgadnij piosenkę Kanyego</p>
 
@@ -21,16 +22,18 @@
         </div>
 
         <input type="button" value="Zgadnij" id="songButton">
-
-        <table id="songTable">
-            <thead>
-                <th>Nazwa Utworu</th>
-                <th>Album</th>
-                <th>Nr Utworu</th>
-                <th>Długość Utworu</th>
-            </thead>
-            <tr style="height: 10px;"></tr>
-        </table>
+        <div id="tableBox">
+            <table id="songTable">
+                <thead>
+                    <th>Nazwa Utworu</th>
+                    <th>Album</th>
+                    <th>Nr Utworu</th>
+                    <th>Długosc Utworu</th>
+                </thead>
+                <tr style="height: 10px;"></tr>
+            </table>
+        </div>
+        
     </main>
 
     <div id="endBackground">

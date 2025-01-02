@@ -89,63 +89,10 @@ fetch('/static/games/json/songs.json').then(response => response.json()).then(da
             list.innerHTML = ''
         }
     })
-
-    function saveGameState() {
-        const state = {
-            turn,
-            guesses,
-            tableHTML: table.innerHTML,
-            inputPlaceholder: input.placeholder,
-            songGuessed,
-            randAlbum,
-            randSong,
-            randSongName,
-            randTime,
-            randAlbumName,
-            randAlbumImage,
-        }
-        sessionStorage.setItem('gameState', JSON.stringify(state))
-    }
-    
-    function restoreGameState() {
-        const savedState = sessionStorage.getItem('gameState')
-        if (savedState) {
-            const {
-                turn: savedTurn,
-                guesses: savedGuesses,
-                tableHTML, inputPlaceholder,
-                songGuessed: savedSongGuessed,
-                randAlbum: savedRandAlbum,
-                randSong: savedRandSong,
-                randSongName: savedRandSongName,
-                randTime: savedRandTime,
-                randAlbumName: savedRandAlbumName,
-                randAlbumImage: savedRandAlbumImage,
-            } = JSON.parse(savedState)
-            turn = savedTurn
-            guesses = savedGuesses
-            table.innerHTML = tableHTML
-            input.placeholder = inputPlaceholder || `Próba ${guesses + 1}/10`
-            songGuessed = savedSongGuessed || false
-            
-            randAlbum = savedRandAlbum
-            randSong = savedRandSong
-            randSongName = savedRandSongName
-            randTime = savedRandTime
-            randAlbumName = savedRandAlbumName
-            randAlbumImage = savedRandAlbumImage
-    
-            if (songGuessed || guesses >= 10) {
-                endGame(songGuessed)
-            }
-        }
-    }
-    
-    restoreGameState()
     
 
     button.addEventListener('click', () => {
-        if (turn > turnLimit) return
+        if (turn > turnLimit || songGuessed) return
 
         const value = input.value
         input.value = ''
@@ -170,138 +117,136 @@ fetch('/static/games/json/songs.json').then(response => response.json()).then(da
                     }
                 }
             }
+        }
+        
+        if (songGuessed || guesses >= turnLimit) {
+            endGame(songGuessed)
+        }
 
-            function createTr() {
-                var newTr = document.createElement('tr')
+        function createTr() {
+            var newTr = document.createElement('tr')
 
-                for (let i = 0; i < columns; i++) {
-                    var newTd = document.createElement('td')
+            for (let i = 0; i < columns; i++) {
+                var newTd = document.createElement('td')
 
-                    if (i == 0) {
-                        newTd.textContent = selSongName
+                if (i == 0) {
+                    newTd.textContent = selSongName
 
-                        if (randSong == selSongPos && randAlbum == selAlbumPos) {
-                            songGuessed = true
-                            newTd.style.backgroundColor = "rgb(59, 134, 63)"
-                        }
+                    if (randSong == selSongPos && randAlbum == selAlbumPos) {
+                        songGuessed = true
+                        newTd.style.backgroundColor = "rgb(59, 134, 63)"
                     }
-                    else if (i == 1) {
-                        newTd.className = 'imageBox'
-                        var image = document.createElement('img')
-
-                        image.src = `/static/games/yeezle-images/${selAlbumImage}.png`
-                        image.alt = selAlbumName
-
-                        newTd.appendChild(document.createTextNode(" "))
-                        let arrowSpan = document.createElement("span")
-                        arrowSpan.className = "arrow"
-
-                        if (randAlbum > selAlbumPos) {
-                            arrowSpan.textContent = "▲"
-                        }
-                        else if (randAlbum < selAlbumPos) {
-                            arrowSpan.textContent = "▼"
-                        }
-                        if (Math.abs(randAlbum-selAlbumPos) <= 2 && randAlbum != selAlbumPos) {
-                            newTd.style.backgroundColor = "rgb(184, 157, 82)"
-                        }
-                        else if (randAlbum == selAlbumPos) {
-                            newTd.style.backgroundColor = "rgb(59, 134, 63)"
-                        }
-
-                        newTd.appendChild(image)
-                        newTd.appendChild(arrowSpan)
-                    }
-                    else if (i == 2) {
-                        newTd.textContent = selSongPos + 1
-                        newTd.appendChild(document.createTextNode(" "))
-                        let arrowSpanSong = document.createElement("span")
-                        arrowSpanSong.className = "arrow"
-                        if (randSong > selSongPos) {
-                            arrowSpanSong.textContent = "▲"
-                        }
-                        else if (randSong < selSongPos) {
-                            arrowSpanSong.textContent = "▼"
-                        }
-                        if (Math.abs(randSong-selSongPos) <= 2 && randSong != selSongPos) {
-                            newTd.style.backgroundColor = "rgb(184, 157, 82)"
-                        }
-                        else if (randSong == selSongPos) {
-                            newTd.style.backgroundColor = "rgb(59, 134, 63)"
-                        }
-                        newTd.appendChild(arrowSpanSong)
-                    }
-                    else if (i == 3) {
-                        newTd.textContent = selSongLen
-
-                        let timeSelectedConvert = selSongLen.split(":")
-                        let trueSelectedTime = (parseInt(timeSelectedConvert[0])*60)+parseInt(timeSelectedConvert[1])
-
-                        let timeRandConvert = randTime.split(":")
-                        let trueRandTime = (parseInt(timeRandConvert[0])*60)+parseInt(timeRandConvert[1])
-
-                        newTd.appendChild(document.createTextNode(" "))
-
-                        let arrowSpanTime = document.createElement("span")
-                        arrowSpanTime.className = "arrow"
-
-                        if (trueRandTime > trueSelectedTime)
-                            arrowSpanTime.textContent = "▲"
-                        else if (trueRandTime < trueSelectedTime)
-                            arrowSpanTime.textContent = "▼"
-
-                        if (Math.abs(trueRandTime-trueSelectedTime) <= 30 && trueRandTime != trueSelectedTime)
-                            newTd.style.backgroundColor = "rgb(184, 157, 82)"
-                        else if (trueRandTime == trueSelectedTime)
-                            newTd.style.backgroundColor = "rgb(59, 134, 63)"
-
-                        newTd.appendChild(arrowSpanTime)
-                    }
-
-                    newTr.appendChild(newTd)
                 }
-                table.appendChild(newTr)
+                else if (i == 1) {
+                    newTd.className = 'imageBox'
+                    var image = document.createElement('img')
 
-                saveGameState()
+                    image.src = `/static/games/yeezle-images/${selAlbumImage}.png`
+                    image.alt = selAlbumName
 
-                if (songGuessed) {
-                    endGame(songGuessed)
+                    newTd.appendChild(document.createTextNode(" "))
+                    let arrowSpan = document.createElement("span")
+                    arrowSpan.className = "arrow"
+
+                    if (randAlbum > selAlbumPos) {
+                        arrowSpan.textContent = "▲"
+                    }
+                    else if (randAlbum < selAlbumPos) {
+                        arrowSpan.textContent = "▼"
+                    }
+                    if (Math.abs(randAlbum-selAlbumPos) <= 2 && randAlbum != selAlbumPos) {
+                        newTd.style.backgroundColor = "rgb(184, 157, 82)"
+                    }
+                    else if (randAlbum == selAlbumPos) {
+                        newTd.style.backgroundColor = "rgb(59, 134, 63)"
+                    }
+
+                    newTd.appendChild(image)
+                    newTd.appendChild(arrowSpan)
                 }
-                if (guesses >= 10) {
-                    input.placeholder = "Guess 10/10"
-                    endGame(songGuessed)
+                else if (i == 2) {
+                    newTd.textContent = selSongPos + 1
+                    newTd.appendChild(document.createTextNode(" "))
+                    let arrowSpanSong = document.createElement("span")
+                    arrowSpanSong.className = "arrow"
+                    if (randSong > selSongPos) {
+                        arrowSpanSong.textContent = "▲"
+                    }
+                    else if (randSong < selSongPos) {
+                        arrowSpanSong.textContent = "▼"
+                    }
+                    if (Math.abs(randSong-selSongPos) <= 2 && randSong != selSongPos) {
+                        newTd.style.backgroundColor = "rgb(184, 157, 82)"
+                    }
+                    else if (randSong == selSongPos) {
+                        newTd.style.backgroundColor = "rgb(59, 134, 63)"
+                    }
+                    newTd.appendChild(arrowSpanSong)
                 }
+                else if (i == 3) {
+                    newTd.textContent = selSongLen
+
+                    let timeSelectedConvert = selSongLen.split(":")
+                    let trueSelectedTime = (parseInt(timeSelectedConvert[0])*60)+parseInt(timeSelectedConvert[1])
+
+                    let timeRandConvert = randTime.split(":")
+                    let trueRandTime = (parseInt(timeRandConvert[0])*60)+parseInt(timeRandConvert[1])
+
+                    newTd.appendChild(document.createTextNode(" "))
+
+                    let arrowSpanTime = document.createElement("span")
+                    arrowSpanTime.className = "arrow"
+
+                    if (trueRandTime > trueSelectedTime)
+                        arrowSpanTime.textContent = "▲"
+                    else if (trueRandTime < trueSelectedTime)
+                        arrowSpanTime.textContent = "▼"
+
+                    if (Math.abs(trueRandTime-trueSelectedTime) <= 30 && trueRandTime != trueSelectedTime)
+                        newTd.style.backgroundColor = "rgb(184, 157, 82)"
+                    else if (trueRandTime == trueSelectedTime)
+                        newTd.style.backgroundColor = "rgb(59, 134, 63)"
+
+                    newTd.appendChild(arrowSpanTime)
+                }
+
+                newTr.appendChild(newTd)
+            }
+            table.appendChild(newTr)
+
+            if (songGuessed || guesses >= turnLimit) {
+                endGame(songGuessed)
+            }
+        }
+        
+        function endGame(result) {
+            endBackground.style.display = 'flex'
+
+            endPage.innerHTML = ''
+
+            var status = document.createElement('p')
+
+            var span = document.createElement('span')
+            span.innerHTML = 'Piosenką było:'
+
+            var image = document.createElement('img')
+            image.src = `/static/games/yeezle-images/${randAlbumImage}.png`
+            image.alt = randAlbumName
+
+            var song = document.createElement('h1')
+            song.innerHTML = randSongName
+
+            if (result) {
+                status.innerHTML = 'Wygrałeś'
+            }
+            else {
+                status.innerHTML = 'Przegrałeś'
             }
 
-            function endGame(result) {
-                endBackground.style.display = 'block'
-
-                var status = document.createElement('p')
-
-                var span = document.createElement('span')
-                span.innerHTML = 'Piosenką było:'
-
-                var image = document.createElement('img')
-                image.src = `/static/games/yeezle-images/${randAlbumImage}.png`
-                image.alt = randAlbumName
-
-                var song = document.createElement('h1')
-                song.innerHTML = randSongName
-
-                if (result) {
-                    status.innerHTML = 'Wygrałeś'
-                }
-                else {
-                    status.innerHTML = 'Przegrałeś'
-                }
-
-                endPage.appendChild(status)
-                endPage.appendChild(span)
-                endPage.appendChild(image)
-                endPage.appendChild(song)
-
-                saveGameState()
-            }
+            endPage.appendChild(status)
+            endPage.appendChild(span)
+            endPage.appendChild(image)
+            endPage.appendChild(song)
         }
     })
 })
