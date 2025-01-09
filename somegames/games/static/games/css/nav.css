@@ -1,0 +1,27 @@
+#gamesIcon {
+    color: #FF5722;
+}
+#gamesIcon > img {
+    filter: invert(46%) sepia(77%) saturate(3815%) hue-rotate(347deg) brightness(104%) contrast(101%);
+}
+
+#profileIcon > img {
+    filter: invert(49%) sepia(14%) saturate(4606%) hue-rotate(178deg) brightness(98%) contrast(94%);
+}
+#profileIcon {
+    color: #2196F3;
+}
+
+#settingsIcon > img {
+    filter: invert(53%) sepia(18%) saturate(592%) hue-rotate(155deg) brightness(84%) contrast(82%);
+}
+#settingsIcon {
+    color: #607D8B;
+}
+
+#logoutIcon > img {
+    filter: invert(25%) sepia(44%) saturate(4116%) hue-rotate(344deg) brightness(90%) contrast(89%);
+}
+#logoutIcon {
+    color: #D32F2F;
+}

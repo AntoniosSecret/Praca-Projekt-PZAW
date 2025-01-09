@@ -2,7 +2,16 @@
 {% load static %}
 
 {% block content %}
-<main>
-    Dostępne Gry
+<header class="otherHeaders">
+    <h1>Dostępne Gry</h1>
+    <a href="{% url 'home' %}"><img src="{% static 'games/icons/exit.svg' %}" alt="Exit Game" id="exitPage"></a>
+</header>
+<main id="gamesMain">
+    <div class="game-container">
+        <a href="{% url 'yeezle' %}">
+            <img src="{% static 'games/minis/yeezle-mini.png' %}" alt="Yeezle">
+            <span class="overlay-text">Zagraj</span>
+        </a>
+    </div>
 </main>
 {% endblock %}

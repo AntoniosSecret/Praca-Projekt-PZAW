@@ -3,4 +3,15 @@
 
 {% block content %}
 
+<header class="otherHeaders">
+    <h1>Ustawienia</h1>
+    <a href="{% url 'home' %}"><img src="{% static 'games/icons/exit.svg' %}" alt="Exit Game" id="exitPage"></a>
+</header>
+<main id="settingsMain">
+    <input type="button" value="Beep">
+    <input type="text" placeholder="Boop" name="" id="">
+    <input type="range" name="" id="">
+    <input type="date" name="" id="">
+</main>
+
 {% endblock %}

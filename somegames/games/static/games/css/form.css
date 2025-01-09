@@ -1,5 +1,11 @@
 #formMain {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
     align-items: center;
+
+    color: white;
 
     padding-top: 0;
 }

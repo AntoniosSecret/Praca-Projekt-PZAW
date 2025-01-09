@@ -3,4 +3,12 @@
 
 {% block content %}
 
+<header class="otherHeaders">
+    <h1>Mój Profil</h1>
+    <a href="{% url 'home' %}"><img src="{% static 'games/icons/exit.svg' %}" alt="Exit Game" id="exitPage"></a>
+</header>
+<main id="profileMain">
+    <p>Witaj, {{ username }}.</p>
+</main>
+
 {% endblock %}

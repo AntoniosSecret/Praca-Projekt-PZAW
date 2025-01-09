@@ -13,7 +13,7 @@
         <a href="{% url 'logout' %}" content="Wyloguj" id="logoutIcon"><img src="{% static 'games/icons/logout.svg' %}" alt="ikona wylogowania"></a>
     </nav>
 </header>
-<main>
+<main id="homeMain">
     {% include 'games/messages.html' %}
 
     {% if user.is_superuser %}

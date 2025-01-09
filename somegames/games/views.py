@@ -90,6 +90,7 @@ def all_games(request):
 def profile(request):
     context = {
         'title': f'Profil: {request.user.username}',
+        'username': request.user.username,
     }
     if request.user.is_authenticated:
         retcode = 200
